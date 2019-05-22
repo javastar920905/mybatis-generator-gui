@@ -250,7 +250,8 @@ public class CodeGenerator {
    * @param fileName
    * @return
    */
-  private static void deleteAnnotation(String fileName) {
+  public static void deleteAnnotation(String fileName) {
+    fileName=PROJECT_PATH + JAVA_PATH +"/"+fileName;
     System.out.println("开始自定义生成java domain: " + fileName);
     BufferedReader br = null;
     String line = null;

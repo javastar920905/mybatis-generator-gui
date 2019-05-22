@@ -66,6 +66,11 @@ public class MybatisGeneratorBridge {
                 .replaceAll(".entity", "").replaceAll(".model", "");
         CodeGenerator.genCodeByCustomModelName(generatorConfig.getTableName(), null);
 
+        //对生成的实体类进行改造
+        String javaDomainName = generatorConfig.getModelPackage().replaceAll("\\.", "/")+"/"+ generatorConfig.getDomainObjectName() + ".java";
+        CodeGenerator.deleteAnnotation(javaDomainName);
+
+
     }
 
     /**

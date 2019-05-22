@@ -24,8 +24,7 @@ mybatis-generator-gui是基于[mybatis generator](http://www.mybatis.org/generat
 本工具由于使用了Java 8的众多特性，所以要求JDK <strong>1.8.0.60</strong>以上版本，另外<strong>JDK 1.9</strong>暂时还不支持。
 
 ### 下载
-你可以从本链接下载本工具: http://tools.mingzhi.ink
-
+你可以从本链接下载本工具: https://javabus.oss-cn-beijing.aliyuncs.com/mybatis-generator-gui.jar
 
 ### 启动本软件
 
@@ -48,7 +47,7 @@ mybatis-generator-gui是基于[mybatis generator](http://www.mybatis.org/generat
 
 Eclipse or IntelliJ IDEA中启动, 找到```com.zzg.mybatis.generator.MainUI```类并运行就可以了（主要你的IED运行的jdk版本是否符合要求）
 
-- 方法三：打包为本地原生应用，双击快捷方式即可启动，方便快捷
+- 方法四：打包为本地原生应用，双击快捷方式即可启动，方便快捷
 
   如果不想打包后的安装包logo为Java的灰色的茶杯，需要在pom文件里将对应操作系统平台的图标注释放开
 

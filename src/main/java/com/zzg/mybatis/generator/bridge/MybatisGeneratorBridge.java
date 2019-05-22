@@ -58,12 +58,16 @@ public class MybatisGeneratorBridge {
 
 
     public void generate() throws Exception {
-        // 生成实体类和mapper接口 mapper.xml
+//        // 生成实体类和mapper接口 mapper.xml
         genModelAndMapper();
-        //生成controller 和service
+
+        CodeGenerator.selectedDatabaseConfig=selectedDatabaseConfig;
         CodeGenerator.PROJECT_PATH=generatorConfig.getProjectFolder();
         CodeGenerator.BASE_PACKAGE=generatorConfig.getModelPackage()
                 .replaceAll(".entity", "").replaceAll(".model", "");
+        CodeGenerator.MODEL_PACKAGE=generatorConfig.getModelPackage();
+        CodeGenerator.MAPPER_PACKAGE=generatorConfig.getDaoPackage();
+        //自定义 生成controller 和service
         CodeGenerator.genCodeByCustomModelName(generatorConfig.getTableName(), null);
 
         //对生成的实体类进行改造
@@ -83,7 +87,9 @@ public class MybatisGeneratorBridge {
 
         context.addProperty("javaFileEncoding", "UTF-8");
 
+        //选中数据库类型 mysql
         String dbType = selectedDatabaseConfig.getDbType();
+        //驱动路径 E:\gitRepository\mybatis-generator-gui\target\classes\lib\mysql-connector-java-5.1.38.jar
         String connectorLibPath = ConfigHelper.findConnectorLibPath(dbType);
         _LOG.info("connectorLibPath: {}", connectorLibPath);
         configuration.addClasspathEntry(connectorLibPath);

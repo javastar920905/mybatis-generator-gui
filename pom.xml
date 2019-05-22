@@ -80,6 +80,13 @@
             <artifactId>guava</artifactId>
             <version>23.0</version>
         </dependency>
+        <!--MySQL JDBC驱动 lib 包下自动加载 不同版本驱动-->
+        <!--<dependency>-->
+            <!--<groupId>mysql</groupId>-->
+            <!--<artifactId>mysql-connector-java</artifactId>-->
+            <!--<version>5.1.38</version>-->
+            <!--<scope>runtime</scope>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>

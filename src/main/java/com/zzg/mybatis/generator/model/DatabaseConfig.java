@@ -4,6 +4,17 @@ import java.util.Objects;
 
 /**
  * Created by Owen on 5/13/16.
+ *
+ * selectedDatabaseConfig = {DatabaseConfig@4639} "DatabaseConfig{id=1, dbType='MySQL', name='dev', host='dbserver', port='3306', schema='article', username='apple', password='X0dxeLpK', encoding='utf8', lport='null', rport='null', sshPort='null', sshHost='null', sshUser='null', sshPassword='null'}"
+ *  id = {Integer@4676} 1
+ *  dbType = "MySQL"
+ *  name = "dev"
+ *  host = "dbserver"
+ *  port = "3306"
+ *  schema = "article"
+ *  username = "apple"
+ *  password = "X0dxeLpK"
+ *  encoding = "utf8"
  */
 public class DatabaseConfig {
 

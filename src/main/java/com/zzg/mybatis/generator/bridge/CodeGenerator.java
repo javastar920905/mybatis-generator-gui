@@ -2,6 +2,9 @@ package com.zzg.mybatis.generator.bridge;
 
 import com.google.common.base.CaseFormat;
 import com.zzg.mybatis.generator.model.DatabaseConfig;
+import com.zzg.mybatis.generator.model.DbType;
+import com.zzg.mybatis.generator.util.ConfigHelper;
+import com.zzg.mybatis.generator.util.DbUtil;
 import freemarker.template.TemplateExceptionHandler;
 import org.apache.commons.lang3.StringUtils;
 import org.mybatis.generator.api.MyBatisGenerator;
@@ -77,7 +80,7 @@ public class CodeGenerator {
      * @param modelName 自定义的 Model 名称
      */
     public static void genCodeByCustomModelName(String tableName, String modelName) {
-        //genModelAndMapper(tableName, modelName);
+        genModelAndMapper(tableName, modelName);
         genService(tableName, modelName);
         genController(tableName, modelName);
     }
@@ -91,10 +94,15 @@ public class CodeGenerator {
         context.addProperty(PropertyRegistry.CONTEXT_ENDING_DELIMITER, "`");
 
         JDBCConnectionConfiguration jdbcConnectionConfiguration = new JDBCConnectionConfiguration();
-        jdbcConnectionConfiguration.setConnectionURL(selectedDatabaseConfig.getHost());
+        try {
+            jdbcConnectionConfiguration.setConnectionURL(DbUtil.getConnectionUrlWithSchema(selectedDatabaseConfig));
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         jdbcConnectionConfiguration.setUserId(selectedDatabaseConfig.getUsername());
         jdbcConnectionConfiguration.setPassword(selectedDatabaseConfig.getPassword());
-        jdbcConnectionConfiguration.setDriverClass("");
+        jdbcConnectionConfiguration.setDriverClass(DbType.valueOf(selectedDatabaseConfig.getDbType()).getDriverClass());
+
         context.setJdbcConnectionConfiguration(jdbcConnectionConfiguration);
 
         PluginConfiguration pluginConfiguration = new PluginConfiguration();
@@ -133,6 +141,9 @@ public class CodeGenerator {
             Configuration config = new Configuration();
             config.addContext(context);
             config.validate();
+            //驱动路径 E:\gitRepository\mybatis-generator-gui\target\classes\lib\mysql-connector-java-5.1.38.jar
+            String connectorLibPath = ConfigHelper.findConnectorLibPath(selectedDatabaseConfig.getDbType());
+            config.addClasspathEntry(connectorLibPath);
 
             boolean overwrite = true;
             DefaultShellCallback callback = new DefaultShellCallback(overwrite);

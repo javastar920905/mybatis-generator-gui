@@ -80,6 +80,18 @@
             <artifactId>guava</artifactId>
             <version>23.0</version>
         </dependency>
+
+        <!--通用mapper -->
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper</artifactId>
+            <version>3.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>4.2.1</version>
+        </dependency>
         <!--MySQL JDBC驱动 lib 包下自动加载 不同版本驱动-->
         <!--<dependency>-->
             <!--<groupId>mysql</groupId>-->

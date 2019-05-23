@@ -1,6 +1,15 @@
-mybatis-generator-gui
+mybatis-generator-gui 
 ==============
 
+> 通过修改源码,添加了功能: 基于自定义模板ftl 生成controller, service ,mybatis 代码 (只计划维护 mysql数据库)
+
+### 下载
+你可以从本链接下载本工具: 
+[jar包方式 需要命令行启动 java -jar mybatis-generator-gui.jar -13MB](https://javabus.oss-cn-beijing.aliyuncs.com/code-gen-gui-jar.zip)
+[双击启动exe 文件方式 - 100MB](https://javabus.oss-cn-beijing.aliyuncs.com/code-gen-gui-jar.zip)
+ 
+
+### mybatis-generator-gui 简介
 mybatis-generator-gui是基于[mybatis generator](http://www.mybatis.org/generator/index.html)开发一款界面工具, 本工具可以使你非常容易及快速生成Mybatis的Java POJO文件及数据库Mapping文件。
 
 ![image](https://user-images.githubusercontent.com/3505708/49334784-1a42c980-f619-11e8-914d-9ea85db9cec3.png)
@@ -23,10 +32,9 @@ mybatis-generator-gui是基于[mybatis generator](http://www.mybatis.org/generat
 ### 要求
 本工具由于使用了Java 8的众多特性，所以要求JDK <strong>1.8.0.60</strong>以上版本，另外<strong>JDK 1.9</strong>暂时还不支持。
 
-### 下载
-你可以从本链接下载本工具: https://javabus.oss-cn-beijing.aliyuncs.com/mybatis-generator-gui.jar
 
-### 启动本软件
+
+### 本地启动本软件
 
 * 方法一：下载
 ```bash
@@ -55,6 +63,8 @@ Eclipse or IntelliJ IDEA中启动, 找到```com.zzg.mybatis.generator.MainUI```�
 	#<icon>${project.basedir}/package/windows/mybatis-generator-gui.ico</icon>为windows
 	#<icon>${project.basedir}/package/macosx/mybatis-generator-gui.icns</icon>为mac
 	mvn jfx:native
+	在 target\jfx\native\mybatis-generator-gui-0.8.8-SNAPSHOT\下面找到.exe 文件执行
+	发布: 把mybatis-generator-gui-0.8.8-SNAPSHOT 整个文件夹压缩才能使用
 ```
 
 ​	另外需要注意，windows系统打包成exe的话需要安装WiXToolset3+的环境；由于打包后会把jre打入安装包，两个平台均100M左右，体积较大请自行打包；打包后的安装包在target/jfx/native目录下

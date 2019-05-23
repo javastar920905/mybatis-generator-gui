@@ -5,8 +5,8 @@ mybatis-generator-gui
 > 通过修改源码,添加了功能: 基于自定义模板ftl 生成controller, service ,mybatis 代码 (只计划维护 mysql数据库)
 
 本工具发布jar 包和 exe 形式 (大小和方便程度,供用户选择): 
-* [jar包方式 需要命令行启动 java -jar mybatis-generator-gui.jar -13MB](https://javabus.oss-cn-beijing.aliyuncs.com/code-gen-gui-jar.zip)
-* [双击启动exe 文件方式 - 100MB](https://javabus.oss-cn-beijing.aliyuncs.com/code-gen-gui-jar.zip)
+* [jar包方式 需要命令行启动 java -jar mybatis-generator-gui.jar -13MB](https://javabus.oss-cn-beijing.aliyuncs.com/code-gen-gui-jar.zip) jar方式打包有点问题，下次重新发一版
+* [双击启动exe 文件方式 - 100MB](https://javabus.oss-cn-beijing.aliyuncs.com/code-gen-gui.zip)
 * [文档地址](https://javabus.cn/#/books/3.java/java_gui) 
 
 ### mybatis-generator-gui 简介

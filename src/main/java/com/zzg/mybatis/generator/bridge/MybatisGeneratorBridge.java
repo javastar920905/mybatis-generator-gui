@@ -62,11 +62,15 @@ public class MybatisGeneratorBridge {
         //genModelAndMapper();
 
         CodeGenerator.selectedDatabaseConfig = selectedDatabaseConfig;
+        CodeGenerator.generatorConfig = generatorConfig;
         CodeGenerator.PROJECT_PATH = generatorConfig.getProjectFolder();
-        CodeGenerator.BASE_PACKAGE = generatorConfig.getModelPackage()
-                .replaceAll(".entity", "").replaceAll(".model", "");
+        CodeGenerator.BASE_PACKAGE = generatorConfig.getBasePackage();
         CodeGenerator.MODEL_PACKAGE = generatorConfig.getModelPackage();
         CodeGenerator.MAPPER_PACKAGE = generatorConfig.getDaoPackage();
+        CodeGenerator.MAPPER_INTERFACE_REFERENCE=generatorConfig.getTkCommonMapper();
+        //ftl模板目录
+        CodeGenerator.TEMPLATE_FILE_PATH=generatorConfig.getFtlTemplateFolder();
+
         //自定义 生成controller 和service
         CodeGenerator.genCodeByCustomModelName(generatorConfig.getTableName(), null);
 

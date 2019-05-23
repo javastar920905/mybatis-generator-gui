@@ -3,6 +3,7 @@ package com.zzg.mybatis.generator.bridge;
 import com.google.common.base.CaseFormat;
 import com.zzg.mybatis.generator.model.DatabaseConfig;
 import com.zzg.mybatis.generator.model.DbType;
+import com.zzg.mybatis.generator.model.GeneratorConfig;
 import com.zzg.mybatis.generator.util.ConfigHelper;
 import com.zzg.mybatis.generator.util.DbUtil;
 import freemarker.template.TemplateExceptionHandler;
@@ -27,6 +28,7 @@ public class CodeGenerator {
     private static final Logger logger = LoggerFactory.getLogger(CodeGenerator.class);
 
     public static DatabaseConfig selectedDatabaseConfig;
+    public static GeneratorConfig generatorConfig;
 
     /**
      * 要生成目标项目路径 E:\gitRepository\spring-boot-api-project-seed\serviceA-provider
@@ -36,23 +38,23 @@ public class CodeGenerator {
      * 项目基础包名称，根据自己公司的项目修改
      **/
     public static String BASE_PACKAGE = "com.company.project";
-    public static  String MODEL_PACKAGE = BASE_PACKAGE + ".model";// Model所在包
-    public static  String MAPPER_PACKAGE = BASE_PACKAGE + ".dao";// Mapper所在包
+    public static String MODEL_PACKAGE = BASE_PACKAGE + ".model";// Model所在包
+    public static String MAPPER_PACKAGE = BASE_PACKAGE + ".dao";// Mapper所在包
+    // 通用Mapper插件 基础接口的完全限定名
+    public static String MAPPER_INTERFACE_REFERENCE;
     /**
      * controller 和 service 模板位置
      **/
-    private static final String TEMPLATE_FILE_PATH = CodeGenerator.class.getResource("/generator/template").getPath();
+    public static String TEMPLATE_FILE_PATH = "C:\\Users\\Administrator\\Desktop\\template";//
 
+    //controller service 核心类代理
+    private static String TEMPLATE_CORE_FILE_PATH = CodeGenerator.class.getResource("/generator/template/core").getPath();
+    ;
     private static final String JAVA_PATH = "/src/main/java"; // java文件路径
     private static final String RESOURCES_PATH = "/src/main/resources";// 资源文件路径
-    private static final String PACKAGE_PATH_SERVICE = packageConvertPath(BASE_PACKAGE + ".service");// 生成的Service存放路径
-    private static final String PACKAGE_PATH_SERVICE_IMPL = packageConvertPath(PACKAGE_PATH_SERVICE + ".impl");// 生成的Service实现存放路径
-    private static final String PACKAGE_PATH_CONTROLLER = packageConvertPath(BASE_PACKAGE + ".web");// 生成的Controller存放路径
 
     private static final String AUTHOR = "ouzhx";// @author
     private static final String DATE = new SimpleDateFormat("yyyy/MM/dd").format(new Date());// @date
-
-    public static final String MAPPER_INTERFACE_REFERENCE = BASE_PACKAGE + ".core.Mapper";// Mapper插件基础接口的完全限定名
 
 
 //  public static void main(String[] args) {
@@ -81,8 +83,48 @@ public class CodeGenerator {
      */
     public static void genCodeByCustomModelName(String tableName, String modelName) {
         genModelAndMapper(tableName, modelName);
+        genCore();
         genService(tableName, modelName);
         genController(tableName, modelName);
+    }
+
+    /**
+     * 生成核心类代码
+     **/
+    private static void genCore() {
+        try {
+            freemarker.template.Configuration cfg =
+                    new freemarker.template.Configuration(freemarker.template.Configuration.VERSION_2_3_23);
+            cfg.setDirectoryForTemplateLoading(new File(TEMPLATE_CORE_FILE_PATH));
+            cfg.setDefaultEncoding("UTF-8");
+            cfg.setTemplateExceptionHandler(TemplateExceptionHandler.IGNORE_HANDLER);
+            String corePackagePath = packageConvertPath(BASE_PACKAGE + ".core");
+
+            Map<String, Object> data = new HashMap<>();
+            data.put("date", DATE);
+            data.put("author", AUTHOR);
+            data.put("basePackage", BASE_PACKAGE);
+            data.put("generatorConfig", generatorConfig);
+
+            File dir = new File(TEMPLATE_CORE_FILE_PATH);
+            File[] files = dir.listFiles();
+            for (File templateFile : files) {
+                String templateName = templateFile.getName().replace(".ftl", "");
+
+                File file = new File(PROJECT_PATH + JAVA_PATH + corePackagePath + templateName + ".java");
+                if (!file.exists()) {
+                    if (!file.getParentFile().exists()) {
+                        file.getParentFile().mkdirs();
+                    }
+                    cfg.getTemplate(templateName + ".ftl").process(data, new FileWriter(file));
+                }
+
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -166,19 +208,33 @@ public class CodeGenerator {
         logger.info(modelName + "Mapper.xml 生成成功");
     }
 
+    //添加变量到ftl
+    private static Map<String, Object> addValue2FTL(String tableName, String modelName) {
+        Map<String, Object> data = new HashMap<>();
+        data.put("date", DATE);
+        data.put("author", AUTHOR);
+        String modelNameUpperCamel =
+                StringUtils.isEmpty(modelName) ? tableNameConvertUpperCamel(tableName) : modelName;
+        data.put("modelNameUpperCamel", modelNameUpperCamel);
+//        data.put("modelNameLowerCamel", tableNameConvertLowerCamel(tableName));
+        data.put("basePackage", BASE_PACKAGE);
+        data.put("baseRequestMapping", modelNameConvertMappingPath(modelNameUpperCamel));
+        data.put("modelNameLowerCamel",
+                CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, modelNameUpperCamel));
+        data.put("generatorConfig", generatorConfig);
+        return data;
+    }
+
     public static void genService(String tableName, String modelName) {
         try {
             freemarker.template.Configuration cfg = getConfiguration();
-
-            Map<String, Object> data = new HashMap<>();
-            data.put("date", DATE);
-            data.put("author", AUTHOR);
             String modelNameUpperCamel =
                     StringUtils.isEmpty(modelName) ? tableNameConvertUpperCamel(tableName) : modelName;
-            data.put("modelNameUpperCamel", modelNameUpperCamel);
-            data.put("modelNameLowerCamel", tableNameConvertLowerCamel(tableName));
-            data.put("basePackage", BASE_PACKAGE);
+            Map<String, Object> data = addValue2FTL(tableName, modelName);
 
+
+            //E:\gitRepository\7easytax\tax-declare\tax-declare-service+ /src/main/java+"包路径"+ 类名
+            String PACKAGE_PATH_SERVICE = packageConvertPath(generatorConfig.getService());
             File file = new File(
                     PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_SERVICE + modelNameUpperCamel + "Service.java");
             if (!file.getParentFile().exists()) {
@@ -187,7 +243,7 @@ public class CodeGenerator {
             cfg.getTemplate("service.ftl").process(data, new FileWriter(file));
             logger.info(modelNameUpperCamel + "Service.java 生成成功");
 
-            File file1 = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_SERVICE_IMPL
+            File file1 = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_SERVICE + "/impl/"
                     + modelNameUpperCamel + "ServiceImpl.java");
             if (!file1.getParentFile().exists()) {
                 file1.getParentFile().mkdirs();
@@ -202,18 +258,11 @@ public class CodeGenerator {
     public static void genController(String tableName, String modelName) {
         try {
             freemarker.template.Configuration cfg = getConfiguration();
-
-            Map<String, Object> data = new HashMap<>();
-            data.put("date", DATE);
-            data.put("author", AUTHOR);
             String modelNameUpperCamel =
                     StringUtils.isEmpty(modelName) ? tableNameConvertUpperCamel(tableName) : modelName;
-            data.put("baseRequestMapping", modelNameConvertMappingPath(modelNameUpperCamel));
-            data.put("modelNameUpperCamel", modelNameUpperCamel);
-            data.put("modelNameLowerCamel",
-                    CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, modelNameUpperCamel));
-            data.put("basePackage", BASE_PACKAGE);
+            Map<String, Object> data = addValue2FTL(tableName,modelName );
 
+            String PACKAGE_PATH_CONTROLLER = packageConvertPath(generatorConfig.getController());
             File file = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_CONTROLLER + modelNameUpperCamel
                     + "Controller.java");
             if (!file.getParentFile().exists()) {

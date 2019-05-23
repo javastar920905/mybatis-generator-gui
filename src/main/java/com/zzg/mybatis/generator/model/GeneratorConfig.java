@@ -66,6 +66,7 @@ public class GeneratorConfig {
 
     private String tableName;
 
+
     private String domainObjectName;
 
     private boolean offsetLimit;
@@ -97,6 +98,41 @@ public class GeneratorConfig {
     private boolean useSchemaPrefix;
 
     private boolean jsr310Support;
+
+    //todo 1 新加ui 字段  生成get setter 方法
+    /**
+     * 项目基础包名
+     */
+    private String basePackage;
+    /**
+     * controller 包名
+     */
+    private String controller;
+    private String service;
+    /**
+     * 通用mapper
+     */
+    private String tkCommonMapper;
+    /**
+     * ftl 模板所在目录
+     */
+    private String ftlTemplateFolder;
+
+    public String getFtlTemplateFolder() {
+        return ftlTemplateFolder;
+    }
+
+    public void setFtlTemplateFolder(String ftlTemplateFolder) {
+        this.ftlTemplateFolder = ftlTemplateFolder;
+    }
+
+    public String getTkCommonMapper() {
+        return tkCommonMapper;
+    }
+
+    public void setTkCommonMapper(String tkCommonMapper) {
+        this.tkCommonMapper = tkCommonMapper;
+    }
 
     public boolean isJsr310Support() {
         return jsr310Support;
@@ -316,5 +352,29 @@ public class GeneratorConfig {
 
     public boolean isUseDAOExtendStyle() {
         return useDAOExtendStyle;
+    }
+
+    public String getBasePackage() {
+        return basePackage;
+    }
+
+    public void setBasePackage(String basePackage) {
+        this.basePackage = basePackage;
+    }
+
+    public String getController() {
+        return controller;
+    }
+
+    public void setController(String controller) {
+        this.controller = controller;
+    }
+
+    public String getService() {
+        return service;
+    }
+
+    public void setService(String service) {
+        this.service = service;
     }
 }

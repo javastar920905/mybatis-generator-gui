@@ -99,7 +99,7 @@ public class PersonOverviewController implements Initializable {
 //            postalCodeLabel.setText(Integer.toString(person.getPostalCode()));
             cityLabel.setText(person.getCity());
 
-            // TODO: We need a way to convert the birthday into a String!
+            //  We need a way to convert the birthday into a String!
             // birthdayLabel.setText(...);
         } else {
             // Person is null, remove all the text.

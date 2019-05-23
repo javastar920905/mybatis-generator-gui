@@ -1,5 +1,9 @@
 package com.zzg.mybatis.generator.model;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * GeneratorConfig is the Config of mybatis generator config exclude database
  * config
@@ -39,6 +43,9 @@ package com.zzg.mybatis.generator.model;
  * useSchemaPrefix = false
  * jsr310Support = false
  */
+
+@Getter
+@Setter
 public class GeneratorConfig {
 
     /**
@@ -99,7 +106,7 @@ public class GeneratorConfig {
 
     private boolean jsr310Support;
 
-    //todo 1 新加ui 字段  生成get setter 方法
+    //todo 1 新加ui 字段  生成get setter 方法(使用lombok 不用再手动生成)
     /**
      * 项目基础包名
      */
@@ -117,264 +124,16 @@ public class GeneratorConfig {
      * ftl 模板所在目录
      */
     private String ftlTemplateFolder;
-
-    public String getFtlTemplateFolder() {
-        return ftlTemplateFolder;
-    }
-
-    public void setFtlTemplateFolder(String ftlTemplateFolder) {
-        this.ftlTemplateFolder = ftlTemplateFolder;
-    }
-
-    public String getTkCommonMapper() {
-        return tkCommonMapper;
-    }
-
-    public void setTkCommonMapper(String tkCommonMapper) {
-        this.tkCommonMapper = tkCommonMapper;
-    }
-
-    public boolean isJsr310Support() {
-        return jsr310Support;
-    }
-
-    public void setJsr310Support(boolean jsr310Support) {
-        this.jsr310Support = jsr310Support;
-    }
-
-    public boolean isUseSchemaPrefix() {
-        return useSchemaPrefix;
-    }
-
-    public void setUseSchemaPrefix(boolean useSchemaPrefix) {
-        this.useSchemaPrefix = useSchemaPrefix;
-    }
-
-    public boolean isUseExample() {
-        return useExample;
-    }
-
-    public void setUseExample(boolean useExample) {
-        this.useExample = useExample;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getTableName() {
-        return tableName;
-    }
-
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
-    }
-
-    public String getDomainObjectName() {
-        return domainObjectName;
-    }
-
-    public void setDomainObjectName(String domainObjectName) {
-        this.domainObjectName = domainObjectName;
-    }
-
-    public String getConnectorJarPath() {
-        return connectorJarPath;
-    }
-
-    public void setConnectorJarPath(String connectorJarPath) {
-        this.connectorJarPath = connectorJarPath;
-    }
-
-    public String getProjectFolder() {
-        return projectFolder;
-    }
-
-    public void setProjectFolder(String projectFolder) {
-        this.projectFolder = projectFolder;
-    }
-
-    public String getModelPackage() {
-        return modelPackage;
-    }
-
-    public void setModelPackage(String modelPackage) {
-        this.modelPackage = modelPackage;
-    }
-
-    public String getModelPackageTargetFolder() {
-        return modelPackageTargetFolder;
-    }
-
-    public void setModelPackageTargetFolder(String modelPackageTargetFolder) {
-        this.modelPackageTargetFolder = modelPackageTargetFolder;
-    }
-
-    public String getDaoPackage() {
-        return daoPackage;
-    }
-
-    public void setDaoPackage(String daoPackage) {
-        this.daoPackage = daoPackage;
-    }
-
-    public String getDaoTargetFolder() {
-        return daoTargetFolder;
-    }
-
-    public void setDaoTargetFolder(String daoTargetFolder) {
-        this.daoTargetFolder = daoTargetFolder;
-    }
-
-    public String getMappingXMLPackage() {
-        return mappingXMLPackage;
-    }
-
-    public void setMappingXMLPackage(String mappingXMLPackage) {
-        this.mappingXMLPackage = mappingXMLPackage;
-    }
-
-    public String getMappingXMLTargetFolder() {
-        return mappingXMLTargetFolder;
-    }
-
-    public void setMappingXMLTargetFolder(String mappingXMLTargetFolder) {
-        this.mappingXMLTargetFolder = mappingXMLTargetFolder;
-    }
-
-    public boolean isOffsetLimit() {
-        return offsetLimit;
-    }
-
-    public void setOffsetLimit(boolean offsetLimit) {
-        this.offsetLimit = offsetLimit;
-    }
-
-    public boolean isComment() {
-        return comment;
-    }
-
-    public void setComment(boolean comment) {
-        this.comment = comment;
-    }
-
-    public boolean isNeedToStringHashcodeEquals() {
-        return needToStringHashcodeEquals;
-    }
-
-    public void setNeedToStringHashcodeEquals(boolean needToStringHashcodeEquals) {
-        this.needToStringHashcodeEquals = needToStringHashcodeEquals;
-    }
-
-    public boolean isNeedForUpdate() {
-        return needForUpdate;
-    }
-
-    public void setNeedForUpdate(boolean needForUpdate) {
-        this.needForUpdate = needForUpdate;
-    }
-
-    public boolean isAnnotationDAO() {
-        return annotationDAO;
-    }
-
-    public void setAnnotationDAO(boolean annotationDAO) {
-        this.annotationDAO = annotationDAO;
-    }
-
-    public boolean isAnnotation() {
-        return annotation;
-    }
-
-    public void setAnnotation(boolean annotation) {
-        this.annotation = annotation;
-    }
-
-    public boolean isUseActualColumnNames() {
-        return useActualColumnNames;
-    }
-
-    public void setUseActualColumnNames(boolean useActualColumnNames) {
-        this.useActualColumnNames = useActualColumnNames;
-    }
-
-    public String getMapperName() {
-        return mapperName;
-    }
-
-    public void setMapperName(String mapperName) {
-        this.mapperName = mapperName;
-    }
-
-    public String getGenerateKeys() {
-        return generateKeys;
-    }
-
-    public void setGenerateKeys(String generateKeys) {
-        this.generateKeys = generateKeys;
-    }
-
-    public String getEncoding() {
-        return encoding;
-    }
-
-    public void setEncoding(String encoding) {
-        this.encoding = encoding;
-    }
-
-    public boolean getUseTableNameAlias() {
-        return useTableNameAlias;
-    }
-
-    public void setUseTableNameAlias(boolean useTableNameAlias) {
-        this.useTableNameAlias = useTableNameAlias;
-    }
+    /**
+     * 是否生成core包
+     */
+    private boolean corePackageFlag;
 
     public boolean isUseTableNameAlias() {
         return useTableNameAlias;
     }
 
-    public boolean isOverrideXML() {
-        return overrideXML;
-    }
-
-    public void setOverrideXML(boolean overrideXML) {
-        this.overrideXML = overrideXML;
-    }
-
-    public void setUseDAOExtendStyle(boolean useDAOExtendStyle) {
-        this.useDAOExtendStyle = useDAOExtendStyle;
-    }
-
-    public boolean isUseDAOExtendStyle() {
-        return useDAOExtendStyle;
-    }
-
-    public String getBasePackage() {
-        return basePackage;
-    }
-
-    public void setBasePackage(String basePackage) {
-        this.basePackage = basePackage;
-    }
-
-    public String getController() {
-        return controller;
-    }
-
-    public void setController(String controller) {
-        this.controller = controller;
-    }
-
-    public String getService() {
-        return service;
-    }
-
-    public void setService(String service) {
-        this.service = service;
+    public boolean isCorePackageFlag() {
+        return corePackageFlag;
     }
 }

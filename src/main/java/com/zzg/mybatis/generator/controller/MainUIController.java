@@ -84,6 +84,8 @@ public class MainUIController extends BaseFXController {
     @FXML
     private TextField tkCommonMapper;
     @FXML
+    private CheckBox corePackageCheckBox;
+    @FXML
     private CheckBox offsetLimitCheckBox;
     @FXML
     private CheckBox commentCheckBox;
@@ -415,6 +417,7 @@ public class MainUIController extends BaseFXController {
         generatorConfig.setBasePackage(basePackage.getText());
         generatorConfig.setTkCommonMapper(tkCommonMapper.getText());
         generatorConfig.setFtlTemplateFolder(ftlTemplateFolder.getText());
+        generatorConfig.setCorePackageFlag(corePackageCheckBox.isSelected());
 
         //改为自动拼接项目基础包名后,需要手动处理
         String basePackgePrefix = basePackage.getText() + ".";
@@ -441,6 +444,7 @@ public class MainUIController extends BaseFXController {
         service.setText(generatorConfig.getService().replace(basePackgePrefix, ""));
         modelTargetPackage.setText(generatorConfig.getModelPackage().replace(basePackgePrefix, ""));
         daoTargetPackage.setText(generatorConfig.getDaoPackage().replace(basePackgePrefix, ""));
+        corePackageCheckBox.setSelected(generatorConfig.isCorePackageFlag());
 
         projectFolderField.setText(generatorConfig.getProjectFolder());
         generateKeysField.setText(generatorConfig.getGenerateKeys());
@@ -455,7 +459,7 @@ public class MainUIController extends BaseFXController {
         commentCheckBox.setSelected(generatorConfig.isComment());
         overrideXML.setSelected(generatorConfig.isOverrideXML());
         needToStringHashcodeEquals.setSelected(generatorConfig.isNeedToStringHashcodeEquals());
-        useTableNameAliasCheckbox.setSelected(generatorConfig.getUseTableNameAlias());
+        useTableNameAliasCheckbox.setSelected(generatorConfig.isUseTableNameAlias());
         forUpdateCheckBox.setSelected(generatorConfig.isNeedForUpdate());
         annotationDAOCheckBox.setSelected(generatorConfig.isAnnotationDAO());
         annotationCheckBox.setSelected(generatorConfig.isAnnotation());

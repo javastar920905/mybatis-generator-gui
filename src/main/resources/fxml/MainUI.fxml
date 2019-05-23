@@ -28,7 +28,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="713.0" prefWidth="818.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zzg.mybatis.generator.controller.MainUIController">
+<BorderPane prefHeight="709.0" prefWidth="1000.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zzg.mybatis.generator.controller.MainUIController">
     <top>
         <VBox>
             <children>
@@ -55,7 +55,7 @@
         </VBox>
     </top>
     <center>
-        <SplitPane dividerPositions="0.15">
+        <SplitPane dividerPositions="0.2124248496993988" prefHeight="634.0" prefWidth="894.0">
             <items>
                 <AnchorPane maxWidth="500.0" minWidth="100.0" prefHeight="618.0" prefWidth="200.0">
                     <children>
@@ -66,7 +66,7 @@
                <children>
                   <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                              <GridPane alignment="TOP_RIGHT" layoutX="5.0" layoutY="29.0" prefHeight="505.0" prefWidth="766.0" vgap="5.0" AnchorPane.leftAnchor="-5.0" AnchorPane.rightAnchor="10.0">
+                              <GridPane alignment="TOP_RIGHT" layoutX="5.0" layoutY="29.0" prefHeight="599.0" prefWidth="681.0" vgap="5.0" AnchorPane.leftAnchor="-5.0" AnchorPane.rightAnchor="10.0">
                                   <columnConstraints>
                                       <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="157.0" minWidth="132.0" prefWidth="138.0" />
                                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="688.0" minWidth="10.0" prefWidth="222.0" />
@@ -89,7 +89,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="91.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="182.0" minHeight="8.0" prefHeight="182.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="215.0" minHeight="8.0" prefHeight="215.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="99.0" minHeight="11.0" prefHeight="43.0" />
                                   </rowConstraints>
                                   <children>
@@ -215,6 +215,7 @@
                                           <CheckBox fx:id="offsetLimitCheckBox" disable="true" minWidth="100.0" mnemonicParsing="false" selected="true" text="分页插件(暂时只支持MySQL和PostgreSQL)" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                                        </children>
                                     </HBox>
+                                    <CheckBox fx:id="corePackageCheckBox" minWidth="100.0" mnemonicParsing="false" selected="true" text="生成core包 (BaseService,Result等)" />
                                     <HBox prefHeight="100.0" prefWidth="200.0">
                                        <children>
                                           <CheckBox fx:id="commentCheckBox" mnemonicParsing="false" selected="true" text="生成实体域注释(来自表注释)" />
